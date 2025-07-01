@@ -209,7 +209,7 @@ export default {
 </template>
 
 <style scoped>
-h4{
+h4,h5{
     margin: 0;
 }
 p{
