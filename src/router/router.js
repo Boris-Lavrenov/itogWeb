@@ -13,6 +13,13 @@ const routes = [
 		path: '/',
 		component: Composition,
 	},
+
+
+	{
+		path: '/test/:facultyId',
+		component: Carousel,
+	},
+
 ]
 
 const router = createRouter({

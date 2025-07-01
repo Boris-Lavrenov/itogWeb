@@ -66,4 +66,13 @@ export default {
 	display: flex;
 	justify-content: space-between;
 }
+
+@media (max-width: 600px) {
+	.head__text {
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 1.5em;
+	}
+}
 </style>

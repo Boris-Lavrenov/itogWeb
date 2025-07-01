@@ -65,7 +65,7 @@ export default {
                 index = counter % this.url.length
                 this.createPreview(index)
                 counter += 1
-            }, 500)
+            }, 20000)
         },
         createPreview(index = 0) {
             if (this.url[index].faculty === 'QR') {
@@ -256,7 +256,7 @@ export default {
 					</span>
                 </h4>
             </div>
-            <div class="py-3 d-flex justify-content-between">
+            <div class="py-3 d-flex justify-content-between w-100">
                 <div
                       v-if="!isFP"
                       class="myColorRed">
@@ -299,7 +299,7 @@ export default {
                 </table>
             </div>
             <table
-                  class="table-bordered text-center w-100"
+                  class="table-bordered text-center w-100" style="width: 100vw;"
                   :class="[isFP ? 'myStrippedTdFp' : 'myStrippedTd']">
                 <thead>
                 <tr>
@@ -355,7 +355,7 @@ export default {
                 <tbody>
                 <tr v-for="(cat, key, index) in previewJson.plans">
                     <td v-if="!isFP">
-                        <strong>{{ key }}</strong>
+                        <span style="font-size: 1.3rem"><strong>{{ key }}</strong></span>
                     </td>
                     <td
                           style="vertical-align: middle"
@@ -440,5 +440,10 @@ export default {
     font-size: 2rem;
     text-align: center;
     margin-top: 10px
+}
+@media (max-width: 600px) {
+    .vertical-text {
+        transform: rotate(0deg) !important;
+    }
 }
 </style>

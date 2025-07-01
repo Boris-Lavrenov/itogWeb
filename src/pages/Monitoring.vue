@@ -188,7 +188,6 @@ export default {
 					</template>
 				</tbody>
 			</table>
-			<text></text>
 		</div>
         <div v-if="url === 'dfo' || url === 'imvd'" style="text-align: justify; text-indent: 2rem">
             <p style="font-size: 2rem"><strong>Уважаемые абитуриенты!</strong></p>
@@ -210,6 +209,9 @@ export default {
 </template>
 
 <style scoped>
+h4{
+    margin: 0;
+}
 p{
     margin: 0px;
     font-size: 1.2rem;
@@ -255,5 +257,11 @@ th:hover::after {
 
 td {
 	padding: 5px;
+}
+@media (device-width < 600px) {
+    .vertical-text {
+        transform: rotate(0deg) !important;
+        writing-mode: unset
+    }
 }
 </style>
