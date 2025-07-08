@@ -22,8 +22,8 @@ export default {
 		async getJson() {
 			const response = await API.getJSON()
 			this.myJson = response.data.data
-			this.date = this.myJson.date
-			this.time = this.myJson.time
+            this.date = new Date(this.myJson.date_time).toLocaleDateString('ru-RU')
+            this.time = new Date(this.myJson.date_time).toLocaleTimeString('ru-RU',{hour:'numeric',minute:'numeric'})
 			this.points = this.myJson.range
 			this.count = this.points.length + 4
 			this.url = this.$route.params.facultyId

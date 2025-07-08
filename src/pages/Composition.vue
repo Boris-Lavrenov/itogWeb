@@ -16,6 +16,7 @@ export default {
             date: '',
             time: '',
             qr: {flag: false, name: ''},
+            myInterval: null,
             socialAll: [
                 {name: 'Telegram-канал «Академия МВД.BY»', img: '/telegram.png', qr: '/telegramQr.png'},
                 {name: 'Youtube-канал \n«Академия МВД Республики Беларусь»', img: '/Youtube.png', qr: '/YoutubeQr.png'},
@@ -30,8 +31,9 @@ export default {
         async getJson(flag = false) {
             const response = await API.getJSON()
             this.myJson = response.data.data
-            this.date = this.myJson.date
-            this.time = this.myJson.time
+
+            this.date = new Date(this.myJson.date_time).toLocaleDateString('ru-RU')
+            this.time = new Date(this.myJson.date_time).toLocaleTimeString('ru-RU',{hour:'numeric',minute:'numeric'})
             this.range = this.myJson.range
             if (flag) {
                 this.createUrlArray()
@@ -50,13 +52,12 @@ export default {
 
             this.url.splice(0, 0, {faculty: 'QR', query: 'Telegram'})
             this.url.splice(Math.ceil(this.url.length / 2), 0, {faculty: 'QR', query: 'All'})
-            this.createPreview(0)
+            this.createPreview(2)
         },
         interval() {
-            console.log(this.url)
             let counter = 0
             let index = 0
-            setInterval(() => {
+            this.myInterval = setInterval(() => {
                 this.qr.flag = false
                 if (counter % this.url.length === 0) {
                     this.getJson()
@@ -100,6 +101,9 @@ export default {
     },
     mounted() {
         this.interval()
+    },
+    unmounted() {
+        clearInterval(this.myInterval)
     },
     created() {
         this.getJson(true)
@@ -147,7 +151,8 @@ export default {
         <div
               v-else
               class="allSocial" style="height: 100vh">
-            <div class="text-center py-3"><h1 style="font-size: 4.2rem; color:#00205f"><strong>Социальные сети</strong></h1></div>
+            <div class="text-center py-3"><h1 style="font-size: 4.2rem; color:#00205f"><strong>Социальные сети</strong>
+            </h1></div>
             <div>
                 <div class="d-flex justify-content-evenly my-5">
                     <div class="w-25">
@@ -156,7 +161,7 @@ export default {
                                 <img src="/telegram.png" width="200" alt="">
                                 <img src="/telegramQr.png" width="200" alt="">
                             </div>
-                            <span class="titleSocial" >
+                            <span class="titleSocial">
                             <strong>
                                 Telegram-канал<br/>
                                 «Академия МВД.BY»
@@ -435,12 +440,14 @@ export default {
     align-items: center;
     padding: 4rem 2rem
 }
-.titleSocial{
+
+.titleSocial {
     color: #00205f;
     font-size: 2rem;
     text-align: center;
     margin-top: 10px
 }
+
 @media (max-width: 600px) {
     .vertical-text {
         transform: rotate(0deg) !important;
