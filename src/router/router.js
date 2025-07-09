@@ -15,11 +15,6 @@ const routes = [
 	},
 
 
-	{
-		path: '/test/:facultyId',
-		component: Carousel,
-	},
-
 ]
 
 const router = createRouter({
