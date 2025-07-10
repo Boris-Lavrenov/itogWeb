@@ -66,7 +66,7 @@ export default {
                 index = counter % this.url.length
                  this.createPreview(index)
 				counter += 1
-            }, 1000)
+            }, 20000)
         },
         createPreview(index = 0) {
             if (this.url[index].faculty === 'QR') {
