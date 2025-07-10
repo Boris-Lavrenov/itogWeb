@@ -52,21 +52,21 @@ export default {
 
             this.url.splice(0, 0, {faculty: 'QR', query: 'Telegram'})
             this.url.splice(Math.ceil(this.url.length / 2), 0, {faculty: 'QR', query: 'All'})
-            this.createPreview(2)
+            this.createPreview(11)
         },
         interval() {
             let counter = 0
             let index = 0
             this.myInterval = setInterval(() => {
-                this.qr.flag = false
+                 this.qr.flag = false
                 if (counter % this.url.length === 0) {
                     this.getJson()
                 }
 
                 index = counter % this.url.length
-                this.createPreview(index)
-                counter += 1
-            }, 20000)
+                 // this.createPreview(index)
+				counter += 1
+            }, 1000)
         },
         createPreview(index = 0) {
             if (this.url[index].faculty === 'QR') {
@@ -133,6 +133,7 @@ export default {
                   style="height: 100vh">
                 <div class="d-flex justify-content-center flex-column align-items-center">
                     <img
+                          style="margin: 0"
                           src="/telegram.png"
                           alt=""/>
                     <span style="color: #00205f; font-size: 3rem; text-align: center">
@@ -154,12 +155,12 @@ export default {
             <div class="text-center py-3"><h1 style="font-size: 4.2rem; color:#00205f"><strong>Социальные сети</strong>
             </h1></div>
             <div>
-                <div class="d-flex justify-content-evenly my-5">
-                    <div class="w-25">
+                <div class="d-flex justify-content-evenly mb-3">
+                    <div class="w-50">
                         <div class="d-flex flex-column ">
-                            <div class="d-flex justify-content-around">
-                                <img src="/telegram.png" width="200" alt="">
-                                <img src="/telegramQr.png" width="200" alt="">
+                            <div class="d-flex justify-content-center">
+                                <img src="/telegram.png" width="150" alt="">
+                                <img src="/telegramQr.png" width="150" alt="">
                             </div>
                             <span class="titleSocial">
                             <strong>
@@ -170,11 +171,11 @@ export default {
                         </div>
 
                     </div>
-                    <div class="w-25">
+                    <div class="w-50">
                         <div class="d-flex flex-column ">
-                            <div class="d-flex justify-content-around align-items-center">
-                                <img src="/Inst.png" width="200" alt="">
-                                <img src="/InstQr.png" width="200" alt="">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img src="/Inst.png" width="150" alt="">
+                                <img src="/InstQr.png" width="150" alt="">
                             </div>
                             <span class="titleSocial">
                             <strong>
@@ -184,12 +185,12 @@ export default {
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-evenly my-5">
-                    <div class="w-25">
+                <div class="d-flex justify-content-evenly mb-2">
+                    <div class="w-50">
                         <div class="d-flex flex-column ">
-                            <div class="d-flex justify-content-around">
-                                <img src="/TikTok.png" width="200" alt="">
-                                <img src="/TikTokQr.png" width="200" alt="">
+                            <div class="d-flex justify-content-center">
+                                <img src="/TikTok.png" width="150" alt="">
+                                <img src="/TikTokQr.png" width="150" alt="">
                             </div>
                             <span class="titleSocial">
                             <strong>
@@ -200,26 +201,26 @@ export default {
                         </div>
 
                     </div>
-                    <div class="w-25">
+                    <div class="w-50">
                         <div class="d-flex flex-column ">
-                            <div class="d-flex justify-content-around align-items-center">
-                                <img src="/Youtube.png" width="200" alt="">
-                                <img src="/YoutubeQr.png" width="200" alt="">
+                            <div class="d-flex  justify-content-center align-items-center">
+                                <img src="/Youtube.png" width="150" alt="">
+                                <img src="/YoutubeQr.png" width="150" alt="">
                             </div>
                             <span class="titleSocial">
-                            <strong>
+                            <strong style="white-space: nowrap">
                                 Youtube-канал<br/> «Академия МВД Республики Беларусь»
                             </strong>
                             </span>
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-evenly my-5">
+                <div class="d-flex justify-content-evenly ">
                     <div class="w-100">
                         <div class="d-flex flex-column ">
                             <div class="d-flex justify-content-center">
-                                <img src="/Vk.png" width="200" alt="" style="margin-right: 40px">
-                                <img src="/VkQr.png" width="200" alt="">
+                                <img src="/Vk.png" width="150" alt="" style="margin-right: 40px">
+                                <img src="/VkQr.png" width="150" alt="">
                             </div>
                             <span class="titleSocial">
                             <strong>
@@ -240,7 +241,7 @@ export default {
         <div class="w-100 text-center p-2 myBg">
             <h3>Информация о ходе приема документов в {{ previewJson.institute }}</h3>
         </div>
-        <div class="pt-3">
+        <div class="py-1">
             <h1 class="tdHead myColorRed-700 text-center">
                 <strong v-if="!isFP">{{ previewJson.faculty_name }}</strong>
                 <strong v-else>Факультет права</strong>
@@ -446,6 +447,10 @@ export default {
     font-size: 2rem;
     text-align: center;
     margin-top: 10px
+}
+
+.justify-content-center > img:first-child{
+margin-right: 30px;
 }
 
 @media (max-width: 600px) {

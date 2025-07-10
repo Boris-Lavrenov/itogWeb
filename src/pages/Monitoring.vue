@@ -67,7 +67,7 @@ export default {
 
 <template>
 	<div class="app">
-		<div v-if="isLoadPage"><h1>404</h1></div>
+		<div v-if="isLoadPage"></div>
 		<div v-else>
 			<HeadTable
 				:time="time"
