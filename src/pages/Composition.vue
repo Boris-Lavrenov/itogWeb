@@ -1,10 +1,8 @@
 <script xmlns="http://www.w3.org/1999/html">
-import HeadTable from '@/components/HeadTable.vue'
 import {API} from '@/api/tableJson.js'
 
 export default {
     name: 'Composition',
-    components: {HeadTable},
     data() {
         return {
             myJson: '',
