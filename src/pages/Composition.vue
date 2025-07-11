@@ -53,7 +53,7 @@ export default {
 
             this.url.splice(0, 0, {faculty: 'QR', query: 'Telegram'})
             this.url.splice(Math.ceil(this.url.length / 2), 0, {faculty: 'QR', query: 'All'})
-            this.createPreview(18)
+            this.createPreview(0)
         },
         interval() {
             let counter = 0
@@ -65,9 +65,9 @@ export default {
                 }
 
                 index = counter % this.url.length
-                 // this.createPreview(index)
+                 this.createPreview(index)
 				counter += 1
-            }, 2000)
+            }, 20000)
         },
         createPreview(index = 0) {
             if (this.url[index].faculty === 'QR') {
