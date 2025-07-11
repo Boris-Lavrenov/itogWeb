@@ -12,6 +12,7 @@ export default {
             url: [],
             previewJson: {education_form: '', institute: '', faculty_name: '', specialty_name: ''},
             isFP: false,
+            isFpAndFpk: false,
             range: [],
             date: '',
             time: '',
@@ -52,7 +53,7 @@ export default {
 
             this.url.splice(0, 0, {faculty: 'QR', query: 'Telegram'})
             this.url.splice(Math.ceil(this.url.length / 2), 0, {faculty: 'QR', query: 'All'})
-            this.createPreview(0)
+            this.createPreview(18)
         },
         interval() {
             let counter = 0
@@ -64,9 +65,9 @@ export default {
                 }
 
                 index = counter % this.url.length
-                 this.createPreview(index)
+                 // this.createPreview(index)
 				counter += 1
-            }, 20000)
+            }, 2000)
         },
         createPreview(index = 0) {
             if (this.url[index].faculty === 'QR') {
@@ -75,6 +76,7 @@ export default {
             } else {
                 const parse = this.myJson[this.url[index].faculty]
                 this.isFP = this.url[index].faculty === 'fp'
+                this.isFpAndFpk = this.url[index].faculty === 'fp' || this.url[index].faculty === 'fpk'
                 this.previewJson.institute = parse.body.educational_institution.educational_institution_title
                 if (this.isFP) {
                     this.previewJson.education_form = parse.body.educational_institution.faculties[this.url[index].query.faculty].faculty_name
@@ -113,7 +115,7 @@ export default {
             return false
         },
         lengthCount() {
-            if (this.isFP) {
+            if (this.isFpAndFpk) {
                 return this.range.length + 5
             } else {
                 return this.range.length + 6
@@ -264,7 +266,7 @@ export default {
             </div>
             <div class="py-3 d-flex justify-content-between w-100">
                 <div
-                      v-if="!isFP"
+                      v-if="!isFpAndFpk"
                       class="myColorRed">
                     <h2><strong>План приема:</strong></h2>
                     <h2 v-for="(person, key, index) in previewJson.plans">
@@ -306,7 +308,7 @@ export default {
             </div>
             <table
                   class="table-bordered text-center w-100" style="width: 100vw;"
-                  :class="[isFP ? 'myStrippedTdFp' : 'myStrippedTd']">
+                  :class="[isFpAndFpk ? 'myStrippedTdFp' : 'myStrippedTd']">
                 <thead>
                 <tr>
                     <td
@@ -318,7 +320,7 @@ export default {
 
                 <tr>
                     <td
-                          v-if="!isFP"
+                          v-if="!isFpAndFpk"
                           style="width: 5%"
                           rowspan="2"
                           class="vertical-text py-2">
@@ -360,7 +362,7 @@ export default {
                 </thead>
                 <tbody>
                 <tr v-for="(cat, key, index) in previewJson.plans">
-                    <td v-if="!isFP">
+                    <td v-if="!isFpAndFpk">
                         <span style="font-size: 1.3rem"><strong>{{ key }}</strong></span>
                     </td>
                     <td
