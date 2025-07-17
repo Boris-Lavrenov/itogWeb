@@ -226,8 +226,8 @@ p{
 
 .vertical-text {
 	background-color: inherit !important;
-	transform: rotate(-180deg);
-	writing-mode: vertical-rl;
+	//transform: rotate(-180deg);
+	//writing-mode: vertical-rl;
 }
 
 table {
@@ -258,10 +258,5 @@ th:hover::after {
 td {
 	padding: 5px;
 }
-@media (device-width < 600px) {
-    .vertical-text {
-        transform: rotate(0deg) !important;
-        writing-mode: unset
-    }
-}
+
 </style>
